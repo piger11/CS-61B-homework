@@ -5,7 +5,6 @@ public class LinkedListDeque<dog>{
     class Node{
     	/*
     	   the IntNode class includes three variables:item,pre pointer and next pointer
-
     	*/
     	public dog item;
       public Node prev;
@@ -13,7 +12,6 @@ public class LinkedListDeque<dog>{
     	/*
     	   this instructor method includes the basic initializes for IntNode, not including
     	initializeing for item
-
     	*/
     	public Node(){
     		this.prev=null;
@@ -22,7 +20,7 @@ public class LinkedListDeque<dog>{
     	/*
     	   this instructor method includes initializes for IntNode,including initializing 
     	 for item
-    	   */
+    	*/
         public Node(dog i){
         	this.item=i;
         	this.prev=null;
@@ -117,14 +115,39 @@ public class LinkedListDeque<dog>{
       this.last.prev.next=this.last;
       return d;
     }
+    /*
+       the method is used for returning the nth numbers of the list;
+    */
+    public dog get(int index){
+      Node d=this.sentinel;
+      for(int i=0;i<index;i++){
+         if(d.next==null){
+            System.out.println("the index is out of bound!");
+            return null;
+         }
+         d=d.next;
+      }
+      return d.item;
+      }
+    public dog getRecursive(int index,Node n){
+        if(index>size){
+         System.out.println("index out of bound");
+        }
+        Node d=n.next;
+        index--;
+        if(index==0){
+         return d.item;
+        }
+        return this.getRecursive(index,d);
+    }
     public static void main(String[]args){
        LinkedListDeque<String>d2=new LinkedListDeque<>("hello");
        System.out.println(d2.sentinel.next.item);
        d2.addFirst("nidie");
        d2.addLast("world");
        d2.printDeque();
-       d2.removeFirst();
-       d2.removeLast();
-       d2.printDeque();
+       System.out.println(d2.get(1));
+       System.out.println(d2.get(2));
+       System.out.println(d2.getRecursive(3,d2.sentinel));  
     }
  }  
